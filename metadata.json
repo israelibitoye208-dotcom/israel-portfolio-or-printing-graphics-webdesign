@@ -1,0 +1,6 @@
+{
+  "name": "Dominion Creative Studio",
+  "description": "Premium Luxury Creative Agency, Branding & Web Design Studio",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
