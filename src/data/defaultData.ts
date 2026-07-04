@@ -39,7 +39,7 @@ export const INITIAL_CMS_STATE: CMSAppState = {
         'High-contrast layouts optimized for direct, elite positioning'
       ],
       icon: 'Monitor',
-      priceEstimate: 'Starting from $2,500',
+      priceEstimate: 'Contact for Custom Quote',
       isActive: true
     },
     {
@@ -54,7 +54,7 @@ export const INITIAL_CMS_STATE: CMSAppState = {
         'Complete suite of stationery, business card designs, and executive layouts'
       ],
       icon: 'Sparkles',
-      priceEstimate: 'Starting from $1,800',
+      priceEstimate: 'Contact for Custom Quote',
       isActive: true
     },
     {
@@ -99,7 +99,7 @@ export const INITIAL_CMS_STATE: CMSAppState = {
         'Perfect choice for corporate histories, church program books, school materials, and journals'
       ],
       icon: 'BookOpen',
-      priceEstimate: 'Starting from $600',
+      priceEstimate: 'Request a Quote',
       isActive: true
     },
     {
@@ -114,7 +114,7 @@ export const INITIAL_CMS_STATE: CMSAppState = {
         'Cohesive visual palettes tailored according to premium brand layouts'
       ],
       icon: 'Calendar',
-      priceEstimate: 'Starting from $150',
+      priceEstimate: 'Request a Quote',
       isActive: true
     },
     {
@@ -144,7 +144,7 @@ export const INITIAL_CMS_STATE: CMSAppState = {
         'Custom floating frames and heavy-duty organic wood mount placements'
       ],
       icon: 'Frame',
-      priceEstimate: 'Starting from $80',
+      priceEstimate: 'Request a Quote',
       isActive: true
     }
   ],

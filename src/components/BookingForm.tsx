@@ -25,7 +25,7 @@ export default function BookingForm({ services, defaultSelectedServiceId = '', v
   const [bookingTime, setBookingTime] = useState<string>('');
   
   // Quote Custom options
-  const [selectedBudget, setSelectedBudget] = useState<string>('₦5,000 - ₦100,000 / $1,000 - $3,500');
+  const [selectedBudget, setSelectedBudget] = useState<string>('Contact for Custom Quote');
   const [customBrief, setCustomBrief] = useState<string>('');
 
   // General Status
@@ -399,10 +399,8 @@ export default function BookingForm({ services, defaultSelectedServiceId = '', v
                         required
                         className="bg-black border border-white/10 rounded-sm text-xs px-3.5 py-2.5 text-white focus:outline-none focus:border-[#D4AF37] transition-all"
                       >
-                        <option value="Under $1,000">Under $1,000</option>
-                        <option value="₦5,000 - ₦100,000 / $1,000 - $3,500">₦5,000 - ₦100,000 / $1,000 - $3,500</option>
-                        <option value="$3,500 - $8,000">$3,500 - $8,000</option>
-                        <option value="$8,000+">$8,000+ Enterprise</option>
+                        <option value="Contact for Custom Quote">Contact for Custom Quote</option>
+                        <option value="Request a Quote">Request a Quote</option>
                       </select>
                     </div>
                   </div>
