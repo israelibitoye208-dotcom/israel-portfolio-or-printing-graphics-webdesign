@@ -1,6 +1,7 @@
 import React from 'react';
 import { Check, Sparkles, Printer, Mail, Award } from 'lucide-react';
 import { VisualConfig } from '../types';
+import israelPortraitImg from '../assets/images/israel_clean_shaven_verbatim_1780079926761.png';
 
 interface AboutProps {
   visual: VisualConfig;
@@ -82,7 +83,7 @@ export default function About({ visual }: AboutProps) {
               {/* Profile Image with Decorative Frame */}
               <div className="relative w-full aspect-square rounded-md overflow-hidden border border-white/10 mb-6 bg-zinc-900 group-hover:border-[#D4AF37]/40 transition-all duration-500">
                 <img 
-                  src="/src/assets/images/israel_clean_shaven_verbatim_1780079926761.png" 
+                  src={israelPortraitImg} 
                   alt="Israel Ibitoye - Founder of Dominion Creative Studio" 
                   className="w-full h-full object-cover object-top hover:scale-[1.03] transition-all duration-700 font-sans"
                   referrerPolicy="no-referrer"

@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowDown, Sparkles, Compass } from 'lucide-react';
 import { VisualConfig } from '../types';
+import israelPortraitImg from '../assets/images/israel_clean_shaven_verbatim_1780079926761.png';
 
 interface HeroProps {
   onStartProject: () => void;
@@ -169,7 +170,7 @@ export default function Hero({ onStartProject, onViewPortfolio, visual }: HeroPr
             {/* Centered High Fidelity Verbatim Portrait of the Owner */}
             <div className="my-auto relative w-full aspect-[4/3] sm:aspect-square rounded border border-white/10 overflow-hidden bg-black/80 group-hover:border-[#D4AF37]/30 transition-all duration-300">
               <img 
-                src="/src/assets/images/israel_clean_shaven_verbatim_1780079926761.png" 
+                src={israelPortraitImg} 
                 alt="Israel Ibitoye - Founder & Lead Strategic Developer" 
                 className="w-full h-full object-cover object-top hover:scale-[1.03] transition-all duration-700 font-sans"
                 referrerPolicy="no-referrer"
