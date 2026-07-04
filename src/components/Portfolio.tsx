@@ -394,7 +394,7 @@ export default function Portfolio({ caseStudies, visual }: PortfolioProps) {
                         rel="noopener noreferrer"
                         className="w-full inline-flex items-center justify-between px-3.5 py-2 bg-[#D4AF37] hover:bg-[#C9A227] text-black font-semibold rounded text-[10px] font-mono tracking-wider uppercase transition-all duration-300"
                       >
-                        <span>Showcase Website</span>
+                        <span>View Live Site</span>
                         <ExternalLink size={12} className="shrink-0" />
                       </a>
                     </div>

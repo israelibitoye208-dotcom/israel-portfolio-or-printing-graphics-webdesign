@@ -180,6 +180,13 @@ export default function App() {
             rawCaseStudies = [originalValuMall, ...rawCaseStudies];
           }
         }
+        const hasUsedAutoLagos = rawCaseStudies.some((c: any) => c.id === 'used-auto-lagos');
+        if (!hasUsedAutoLagos) {
+          const originalUsedAutoLagos = INITIAL_CMS_STATE.caseStudies.find((c: any) => c.id === 'used-auto-lagos');
+          if (originalUsedAutoLagos) {
+            rawCaseStudies = [originalUsedAutoLagos, ...rawCaseStudies];
+          }
+        }
         
         // Always sync key campaign and series collections from INITIAL_CMS_STATE to ensure edits and new entries are fully updated
         rawCaseStudies = rawCaseStudies.map((c: any) => {
@@ -290,6 +297,9 @@ export default function App() {
           }
           if (c.id === 'valu-mall') {
             return { ...c, projectUrl: 'https://israelibitoye208.wixsite.com/valu-mall' };
+          }
+          if (c.id === 'used-auto-lagos') {
+            return { ...c, projectUrl: 'https://israelibitoye208@wixsite.com/used-auto-lagos' };
           }
           return c;
         });

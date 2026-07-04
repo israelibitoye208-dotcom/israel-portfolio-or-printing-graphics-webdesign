@@ -579,6 +579,21 @@ export const INITIAL_CMS_STATE: CMSAppState = {
       projectUrl: 'https://israelibitoye208.wixsite.com/valu-mall'
     },
     {
+      id: 'used-auto-lagos',
+      title: 'Used Auto Lagos',
+      clientName: 'Used Auto Lagos Dealer',
+      industry: 'Premium Automotive Services',
+      summary: 'A clean, responsive car marketplace website built for a Lagos-based auto dealer, showcasing vehicle listings with an easy browsing experience.',
+      designGoals: 'To compose an ultra-clean, high-converting digital car listing marketplace tailored for the Lagos region. We configured visual listing grids, search structures, dynamic filters, and clean contact workflows for seamless consumer exploration.',
+      visualPresentation: {
+        heroImage: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80',
+        brandColor: '#1E3A8A',
+        deliverables: ['Automotive Marketplace Webfront', 'Responsive Inventory Navigation', 'High-Fidelity Vehicle Display Grid', 'Dealer Contact Channels']
+      },
+      isActive: true,
+      projectUrl: 'https://israelibitoye208@wixsite.com/used-auto-lagos'
+    },
+    {
       id: 'exec-printing-showcase',
       title: 'Executive Print & Production Showcase',
       clientName: 'Dominion PrintLab',
