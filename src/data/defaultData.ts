@@ -575,7 +575,7 @@ export const INITIAL_CMS_STATE: CMSAppState = {
         deliverables: ['Automotive Marketplace Webfront', 'Responsive Inventory Navigation', 'High-Fidelity Vehicle Display Grid', 'Dealer Contact Channels']
       },
       isActive: true,
-      projectUrl: 'https://israelibitoye208@wixsite.com/used-auto-lagos'
+      projectUrl: 'https://israelibitoye208.wixsite.com/used-auto-lagos'
     },
     {
       id: 'exec-printing-showcase',

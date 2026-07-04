@@ -299,7 +299,7 @@ export default function App() {
             return { ...c, projectUrl: 'https://israelibitoye208.wixsite.com/valu-mall' };
           }
           if (c.id === 'used-auto-lagos') {
-            return { ...c, projectUrl: 'https://israelibitoye208@wixsite.com/used-auto-lagos' };
+            return { ...c, projectUrl: 'https://israelibitoye208.wixsite.com/used-auto-lagos' };
           }
           return c;
         });
