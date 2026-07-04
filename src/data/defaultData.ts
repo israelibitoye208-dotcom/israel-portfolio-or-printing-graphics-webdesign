@@ -16,7 +16,6 @@ import israelChurchSundayServiceFlyerImg from '../assets/images/israel_church_su
 import beeLaurelImg from '../assets/images/bee_laurel_embroidery_1780261872915.png';
 import revivalFireImg from '../assets/images/revival_fire_campaign_1780262599307.png';
 import hoursOfGraceImg from '../assets/images/hours_of_grace_distinct_speakers_1780264114262.png';
-import dareToBeDifferentImg from '../assets/images/dare_to_be_different_instagram_1780264461827.png';
 import herovergeImg from '../assets/images/heroverge_campaign_instagram_1780264689160.png';
 import superDeliciousBurgerImg from '../assets/images/super_delicious_burger_campaign_1780264892092.png';
 import bossManPosImg from '../assets/images/boss_man_pos_campaign_1780304702388.png';
@@ -362,21 +361,6 @@ export const INITIAL_CMS_STATE: CMSAppState = {
               'Symmetric Golden Block Title Frame',
               'Fading Congregation Silhouette Light-Play',
               'Double Speaker Portrait Arrangement'
-            ]
-          },
-          {
-            id: 'dare-to-be-different-instagram',
-            title: 'Dare to Be Different Instagram Post',
-            clientName: 'Graphic Shop Inc',
-            summary: 'A vibrant brand Campaign Instagram post promoting personal expression and corporate design strength. Features massive bold condensed sans-serif lettering, tailored young African model portraiture under retro sunglasses, and a warm energetic orange backdrop layout.',
-            designGoals: 'To create maximum thumb-stopping contrast in busy modern social feeds by pairing highly geometric, bold typography grids with curated high-fashion model portrait overlays.',
-            image: dareToBeDifferentImg,
-            brandColor: '#FF5E00',
-            deliverables: [
-              'Massive Condensed Typography Overlay',
-              'Vibrant Deep Orange Vector Backdrop',
-              'Premium Fashion Sunglasses Portraiture',
-              'Clean Structural Triple Grid White Footer'
             ]
           },
           {
