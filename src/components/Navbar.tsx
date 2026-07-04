@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShieldCheck, ArrowRight, Layers, PhoneCall } from 'lucide-react';
 import { VisualConfig } from '../types';
+import logoImg from '../assets/images/logo.png';
 
 interface NavbarProps {
   currentTab: 'client' | 'admin';
@@ -19,13 +20,13 @@ export default function Navbar({ currentTab, setView, visual, onNavigateToBookin
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         
         {/* Elegant Luxury Branding Logo */}
-        <div className="flex flex-col cursor-pointer" onClick={() => setView('client')}>
-          <h1 className={`${fontClass} text-xl sm:text-2xl font-bold tracking-widest text-[#FFFFFF] flex items-center gap-2`}>
-            DOMINION CREATIVE <span style={{ color: goldColor }}>STUDIO</span>
-          </h1>
-          <span className="text-[9px] font-mono tracking-[0.25em] text-[#B8B8B8] -mt-1 uppercase">
-            Luxury Creative Systems
-          </span>
+        <div className="flex items-center cursor-pointer" onClick={() => setView('client')}>
+          <img
+            src={logoImg}
+            alt="Dominion Creative Studio"
+            className="h-12 sm:h-14 w-auto object-contain"
+            referrerPolicy="no-referrer"
+          />
         </div>
 
         {/* Navigation Menu Links */}
