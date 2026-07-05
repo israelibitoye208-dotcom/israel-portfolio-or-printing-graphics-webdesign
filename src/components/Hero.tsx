@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowDown, Sparkles, Compass } from 'lucide-react';
 import { VisualConfig } from '../types';
-import israelPortraitImg from '../assets/images/israel_clean_shaven_verbatim_1780079926761.png';
+import profileImg from '../assets/images/profile.png';
 
 interface HeroProps {
   onStartProject: () => void;
@@ -148,12 +148,12 @@ export default function Hero({ onStartProject, onViewPortfolio, visual }: HeroPr
         </div>
 
         {/* Right Side Luxury Showcase Panel featuring Israel Ibitoye's original portrait at the start of the portfolio */}
-        <div className="lg:col-span-5 h-[480px] relative flex items-center justify-center">
+        <div className="lg:col-span-5 h-auto lg:h-[550px] relative flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="relative w-full max-w-[360px] h-[430px] border border-white/10 rounded-lg p-5 bg-gradient-to-br from-[#111] to-[#050505] shadow-2xl shadow-[#D4AF37]/5 overflow-hidden flex flex-col justify-between group"
+            className="relative w-full max-w-[360px] h-auto border border-white/10 rounded-lg p-5 bg-gradient-to-br from-[#111] to-[#050505] shadow-2xl shadow-[#D4AF37]/5 overflow-hidden flex flex-col justify-between gap-4 group"
           >
             {/* Absolute background card overlays to depict deep luxury layers */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37]/5 rounded-bl-full pointer-events-none" />
@@ -168,27 +168,26 @@ export default function Hero({ onStartProject, onViewPortfolio, visual }: HeroPr
             </div>
 
             {/* Centered High Fidelity Verbatim Portrait of the Owner */}
-            <div className="my-auto relative w-full aspect-[4/3] sm:aspect-square rounded border border-white/10 overflow-hidden bg-black/80 group-hover:border-[#D4AF37]/30 transition-all duration-300">
+            <div className="relative w-full aspect-square rounded border border-white/10 overflow-hidden bg-black/80 group-hover:border-[#D4AF37]/30 transition-all duration-300">
               <img 
-                src={israelPortraitImg} 
+                src={profileImg} 
                 alt="Israel Ibitoye - Founder & Lead Strategic Developer" 
                 className="w-full h-full object-cover object-top hover:scale-[1.03] transition-all duration-700 font-sans"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-              
-              {/* Bottom text overlay on photo - Enhanced with glassmorphism, gold accents, and the typewriter system */}
-              <div className="absolute bottom-3 left-3 right-3 p-3 bg-black/90 backdrop-blur-md rounded border border-white/10 text-left">
-                <p className={`${fontClass} text-lg font-bold text-white tracking-tight`}>
-                  Israel Ibitoye
+            </div>
+
+            {/* Bottom text details below photo - Enhanced with glassmorphism, gold accents, and the typewriter system */}
+            <div className="relative p-3 bg-black/90 backdrop-blur-md rounded border border-white/10 text-left">
+              <p className={`${fontClass} text-lg font-bold text-white tracking-tight`}>
+                Israel Ibitoye
+              </p>
+              <div className="flex items-center gap-1.5 mt-1 min-h-[16px]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-ping shrink-0" />
+                <p className="text-[10px] font-mono text-[#D4AF37] uppercase tracking-widest font-semibold transition-all duration-300">
+                  {currentText}
+                  <span className="inline-block w-[2px] h-[10px] bg-[#D4AF37] ml-0.5 align-baseline animate-pulse" />
                 </p>
-                <div className="flex items-center gap-1.5 mt-1 min-h-[16px]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-ping shrink-0" />
-                  <p className="text-[10px] font-mono text-[#D4AF37] uppercase tracking-widest font-semibold transition-all duration-300">
-                    {currentText}
-                    <span className="inline-block w-[2px] h-[10px] bg-[#D4AF37] ml-0.5 align-baseline animate-pulse" />
-                  </p>
-                </div>
               </div>
             </div>
 
