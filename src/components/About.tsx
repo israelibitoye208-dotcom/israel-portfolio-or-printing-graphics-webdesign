@@ -1,7 +1,6 @@
 import React from 'react';
 import { Check, Sparkles, Printer, Mail, Award } from 'lucide-react';
 import { VisualConfig } from '../types';
-import profileImg from '../assets/images/profile.png';
 
 interface AboutProps {
   visual: VisualConfig;
@@ -80,24 +79,11 @@ export default function About({ visual }: AboutProps) {
             <div className="relative w-full max-w-[380px] border border-white/10 rounded-lg p-6 bg-gradient-to-br from-[#111111] to-[#0a0a0a] shadow-2xl overflow-hidden group">
               <div className="absolute top-0 right-0 w-24 h-24 bg-[#D4AF37]/5 rounded-bl-full pointer-events-none" />
               
-              {/* Profile Image with Decorative Frame */}
-              <div className="relative w-full aspect-square rounded-md overflow-hidden border border-white/10 mb-6 bg-zinc-900 group-hover:border-[#D4AF37]/40 transition-all duration-500">
-                <img 
-                  src={profileImg} 
-                  alt="Israel Ibitoye - Founder of Dominion Creative Studio" 
-                  className="w-full h-full object-cover object-top hover:scale-[1.03] transition-all duration-700 font-sans"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 animate-fade-in" />
-                
-                {/* Embedded Overlay Badge */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                  <div className="flex flex-col text-left">
-                    <span className="text-xs font-sans text-white font-medium">Core Director</span>
-                  </div>
-                  <div className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37]/30 text-[8px] font-mono text-[#D4AF37] uppercase tracking-widest font-bold animate-pulse">
-                    Active
-                  </div>
+              {/* Core Director Status Badge */}
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+                <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">Lead Executive Status</span>
+                <div className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37]/30 text-[8px] font-mono text-[#D4AF37] uppercase tracking-widest font-bold animate-pulse">
+                  Active Director
                 </div>
               </div>
 

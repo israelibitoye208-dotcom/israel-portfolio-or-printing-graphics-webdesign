@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowDown, Sparkles, Compass } from 'lucide-react';
 import { VisualConfig } from '../types';
-import profileImg from '../assets/images/profile.png';
 
 interface HeroProps {
   onStartProject: () => void;
@@ -165,16 +164,6 @@ export default function Hero({ onStartProject, onViewPortfolio, visual }: HeroPr
                 <span className="text-[9px] font-mono text-gray-400 tracking-wider uppercase">Lead Director & Architect</span>
               </div>
               <Compass size={14} className="text-[#D4AF37] animate-spin" style={{ animationDuration: '20s' }} />
-            </div>
-
-            {/* Centered High Fidelity Verbatim Portrait of the Owner */}
-            <div className="relative w-full aspect-square rounded border border-white/10 overflow-hidden bg-black/80 group-hover:border-[#D4AF37]/30 transition-all duration-300">
-              <img 
-                src={profileImg} 
-                alt="Israel Ibitoye - Founder & Lead Strategic Developer" 
-                className="w-full h-full object-cover object-top hover:scale-[1.03] transition-all duration-700 font-sans"
-                referrerPolicy="no-referrer"
-              />
             </div>
 
             {/* Bottom text details below photo - Enhanced with glassmorphism, gold accents, and the typewriter system */}
