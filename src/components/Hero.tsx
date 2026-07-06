@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowDown, Sparkles, Compass } from 'lucide-react';
+import { ArrowDown, Sparkles, Compass, Clock, ShieldCheck } from 'lucide-react';
 import { VisualConfig } from '../types';
+import israelPortrait from '../1780671094703.png';
 
 interface HeroProps {
   onStartProject: () => void;
@@ -10,12 +11,12 @@ interface HeroProps {
 }
 
 const TITLES = [
-  "Graphic Designer",
+  "Creative Director",
   "Brand Strategist",
   "Print Specialist",
-  "Logo Designer",
-  "Social Media Designer",
-  "Creative Director"
+  "Full-Stack Architect",
+  "Prepress Expert",
+  "Design Technologist"
 ];
 
 export default function Hero({ onStartProject, onViewPortfolio, visual }: HeroProps) {
@@ -27,14 +28,20 @@ export default function Hero({ onStartProject, onViewPortfolio, visual }: HeroPr
   const [currentText, setCurrentText] = React.useState('');
   const [isDeleting, setIsDeleting] = React.useState(false);
 
+  // UTC clock implementation
+  const [utcTime, setUtcTime] = React.useState('');
+
+  // 3D tilt coordinates
+  const [tilt, setTilt] = React.useState({ x: 0, y: 0 });
+  const [glowPos, setGlowPos] = React.useState({ x: 50, y: 50 });
+
   React.useEffect(() => {
     let timer: NodeJS.Timeout;
     const fullText = TITLES[titleIdx];
     const speed = isDeleting ? 30 : 60;
 
     if (!isDeleting && currentText === fullText) {
-      // Pause at full text
-      timer = setTimeout(() => setIsDeleting(true), 1800);
+      timer = setTimeout(() => setIsDeleting(true), 2000);
     } else if (isDeleting && currentText === '') {
       setIsDeleting(false);
       setTitleIdx((prev) => (prev + 1) % TITLES.length);
@@ -50,156 +57,253 @@ export default function Hero({ onStartProject, onViewPortfolio, visual }: HeroPr
 
     return () => clearTimeout(timer);
   }, [currentText, isDeleting, titleIdx]);
-  
+
+  React.useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const timeStr = now.toUTCString().replace('GMT', 'UTC');
+      setUtcTime(timeStr);
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const box = card.getBoundingClientRect();
+    const x = (e.clientX - box.left) / box.width - 0.5; // -0.5 to 0.5
+    const y = (e.clientY - box.top) / box.height - 0.5; // -0.5 to 0.5
+    
+    // Tilt angle max 12 deg
+    setTilt({ x: x * 12, y: y * -12 });
+    
+    // Glare positioning inside the glass container
+    const glowX = ((e.clientX - box.left) / box.width) * 100;
+    const glowY = ((e.clientY - box.top) / box.height) * 100;
+    setGlowPos({ x: glowX, y: glowY });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+    setGlowPos({ x: 50, y: 50 });
+  };
+
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden py-16 px-4 sm:px-8 bg-black vintage-overlay">
+    <section className="relative min-h-[95vh] flex items-center justify-center overflow-hidden py-20 px-4 sm:px-8 bg-black vintage-overlay">
       
-      {/* Refined golden accent vertical lines on left and right borders */}
-      <div className="absolute top-0 bottom-0 left-6 w-[1px] bg-gradient-to-b from-transparent via-[#D4AF37]/15 to-transparent hidden xl:block" />
-      <div className="absolute top-0 bottom-0 right-6 w-[1px] bg-gradient-to-b from-transparent via-[#D4AF37]/15 to-transparent hidden xl:block" />
+      {/* Luxury alignment borders */}
+      <div className="absolute top-0 bottom-0 left-8 w-[1px] bg-gradient-to-b from-transparent via-[#D4AF37]/10 to-transparent hidden xl:block" />
+      <div className="absolute top-0 bottom-0 right-8 w-[1px] bg-gradient-to-b from-transparent via-[#D4AF37]/10 to-transparent hidden xl:block" />
 
-      {/* Absolute Cinematic grid overlays */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#141414_1px,transparent_1px),linear-gradient(to_bottom,#141414_1px,transparent_1px)] bg-[size:4.5rem_4.5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] opacity-70" />
+      {/* Cinematic grid overlays */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0c0c0c_1px,transparent_1px),linear-gradient(to_bottom,#0c0c0c_1px,transparent_1px)] bg-[size:4.5rem_4.5rem] [mask-image:radial-gradient(ellipse_65%_55%_at_50%_40%,#000_80%,transparent_100%)] opacity-80 pointer-events-none" />
 
-      {/* Floating subtle gold particle or light ray */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#D4AF37]/5 blur-[120px] pointer-events-none" />
+      {/* Ambient gold spotlight behind */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#D4AF37]/3 blur-[140px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
         
-        {/* Left Side Content layout */}
-        <div className="lg:col-span-7 flex flex-col items-start gap-6 text-left">
+        {/* Left Column: Creative Agency Narrative */}
+        <div className="lg:col-span-7 flex flex-col items-start gap-8 text-left">
           
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#D4AF37]/30 bg-black/40 text-[10px] font-mono uppercase tracking-[0.2em] text-[#D4AF37] max-w-max"
-          >
-            <Sparkles size={11} className="text-[#D4AF37]" />
-            <span>Digital Systems & Print Artistry</span>
-          </motion.div>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            {/* Tagline */}
+            <motion.div 
+              initial={{ opacity: 0, x: -15 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-sm border border-[#D4AF37]/20 bg-gradient-to-r from-black to-[#111111] text-[10px] font-mono uppercase tracking-[0.25em] text-[#D4AF37]"
+            >
+              <Sparkles size={11} className="text-[#D4AF37]" />
+              <span>DOMINION // DIGITAL EXHIBITION</span>
+            </motion.div>
 
-          {/* Primary High-converting Headline */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className={`${fontClass} text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]`}
-          >
-            Building Premium <br />
-            <span className="text-gradient-gold">Brands With Precision</span> <br />
-            & Creativity
-          </motion.h2>
+            {/* Dynamic UTC Clock */}
+            {utcTime && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex items-center gap-2 text-[10px] font-mono text-gray-500 border border-white/5 bg-black/60 px-3 py-2 rounded-sm"
+              >
+                <Clock size={11} className="text-[#D4AF37]" />
+                <span className="tracking-wider">{utcTime}</span>
+              </motion.div>
+            )}
+          </div>
 
-          {/* Luxury Subheadline */}
+          {/* Elevated Cinematic Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className={`${fontClass} text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.05]`}
+          >
+            Sculpting Elite <br />
+            <span className="text-gradient-gold">Visual Masterpieces</span> <br />
+            with Absolute Authority
+          </motion.h1>
+
+          {/* Luxury Editorial Subheadline */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-sm sm:text-base md:text-lg font-sans text-gray-400 font-light max-w-xl leading-relaxed"
+            transition={{ duration: 0.9, delay: 0.2 }}
+            className="text-sm sm:text-base md:text-lg text-gray-400 font-light max-w-xl leading-relaxed font-sans"
           >
-            Luxury Websites <span className="mx-2 text-[#D4AF37]">•</span> Executive Branding <span className="mx-2 text-[#D4AF37]">•</span> Professional Printing Solutions. Crafted dynamically for corporate and premium lifestyle enterprises globally.
+            Where senior software development converges with heavy-gauge physical print mastery. We engineer high-converting digital flagships and bespoke, tactile brand merchandise for distinguished enterprises globally.
           </motion.p>
 
-          {/* CTA Buttons row */}
+          {/* Call to Actions with Slide Effects */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mt-4"
+            transition={{ duration: 0.9, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mt-2"
           >
             <button
               onClick={onStartProject}
-              className="px-8 py-4 bg-[#D4AF37] hover:bg-[#C9A227] text-black font-mono text-xs font-semibold uppercase tracking-widest transition-all duration-300 rounded-sm hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-[#D4AF37]/10 cursor-pointer"
+              className="relative overflow-hidden px-8 py-4.5 bg-[#D4AF37] hover:bg-[#C9A227] text-black font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 rounded-sm hover:-translate-y-0.5 active:translate-y-0 shadow-xl shadow-[#D4AF37]/10 cursor-pointer"
               id="hero-start-cta"
             >
-              Start a Project
+              Start an Inquiry
             </button>
             <button
               onClick={onViewPortfolio}
-              className="px-8 py-4 border border-white/20 hover:border-[#D4AF37] text-white hover:text-[#D4AF37] font-mono text-xs font-semibold uppercase tracking-widest bg-black/20 hover:bg-[#D4AF37]/5 transition-all duration-300 rounded-sm active:translate-y-0 cursor-pointer"
+              className="px-8 py-4.5 border border-white/10 hover:border-[#D4AF37] text-white hover:text-[#D4AF37] font-mono text-xs font-semibold uppercase tracking-widest bg-black/40 hover:bg-[#D4AF37]/5 transition-all duration-300 rounded-sm cursor-pointer"
               id="hero-portfolio-cta"
             >
-              View Portfolio
+              Explore Collection
             </button>
           </motion.div>
 
-          {/* Extra mini statistics or luxury markers to reinforce real craftsmanship */}
+          {/* Technical Luxury Metrics */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.9 }}
-            className="flex items-center gap-8 mt-4 pt-8 border-t border-white/5 w-full text-left"
+            transition={{ duration: 1, delay: 0.5 }}
+            className="flex items-center gap-10 mt-4 pt-8 border-t border-white/5 w-full text-left"
           >
             <div>
-              <p className="text-xl font-bold text-white font-mono">100%</p>
-              <p className="text-[10px] uppercase font-mono tracking-wider text-gray-400">Craftsmanship Focus</p>
+              <p className="text-2xl font-bold text-white font-mono tracking-tight">100%</p>
+              <p className="text-[9px] uppercase font-mono tracking-widest text-gray-500 mt-1">Sovereign Craft</p>
             </div>
             <div>
-              <p className="text-xl font-bold text-white font-mono">Phygital</p>
-              <p className="text-[10px] uppercase font-mono tracking-wider text-gray-400">Screen & Substrate</p>
+              <p className="text-2xl font-bold text-white font-mono tracking-tight">Phygital</p>
+              <p className="text-[9px] uppercase font-mono tracking-widest text-gray-500 mt-1">Screen & Substrate</p>
             </div>
             <div>
-              <p className="text-xl font-bold text-white font-mono">Executive</p>
-              <p className="text-[10px] uppercase font-mono tracking-wider text-gray-400">Authority Delivery</p>
+              <p className="text-2xl font-bold text-[#D4AF37] font-mono tracking-tight">VIP</p>
+              <p className="text-[9px] uppercase font-mono tracking-widest text-gray-500 mt-1">Executive Delivery</p>
             </div>
           </motion.div>
         </div>
 
-        {/* Right Side Luxury Showcase Panel featuring Israel Ibitoye's original portrait at the start of the portfolio */}
-        <div className="lg:col-span-5 h-auto lg:h-[550px] relative flex items-center justify-center">
+        {/* Right Column: Interactive 3D Executive Identity Card */}
+        <div className="lg:col-span-5 flex items-center justify-center relative min-h-[450px]">
           <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="relative w-full max-w-[360px] h-auto border border-white/10 rounded-lg p-5 bg-gradient-to-br from-[#111] to-[#050505] shadow-2xl shadow-[#D4AF37]/5 overflow-hidden flex flex-col justify-between gap-4 group"
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-[390px] aspect-[4/5] relative rounded-lg p-5 bg-gradient-to-b from-[#111] to-[#040404] border border-white/10 shadow-2xl hover:border-[#D4AF37]/35 transition-all duration-300 group overflow-hidden"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{
+              transform: `perspective(1000px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
+              transformStyle: 'preserve-3d',
+            }}
           >
-            {/* Absolute background card overlays to depict deep luxury layers */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37]/5 rounded-bl-full pointer-events-none" />
+            {/* Cursor light glare interaction overlay */}
+            <div 
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10"
+              style={{
+                background: `radial-gradient(circle 120px at ${glowPos.x}% ${glowPos.y}%, rgba(212, 175, 55, 0.12), transparent 80%)`
+              }}
+            />
 
-            {/* Header part with active spec title */}
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <div className="flex gap-1.5 animate-pulse">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37]" />
-                <span className="text-[9px] font-mono text-gray-400 tracking-wider uppercase">Lead Director & Architect</span>
-              </div>
-              <Compass size={14} className="text-[#D4AF37] animate-spin" style={{ animationDuration: '20s' }} />
-            </div>
+            {/* Solid gold fine margin borders */}
+            <div className="absolute inset-3 border border-white/5 group-hover:border-[#D4AF37]/15 rounded pointer-events-none transition-colors duration-500" />
 
-            {/* Bottom text details below photo - Enhanced with glassmorphism, gold accents, and the typewriter system */}
-            <div className="relative p-3 bg-black/90 backdrop-blur-md rounded border border-white/10 text-left">
-              <p className={`${fontClass} text-lg font-bold text-white tracking-tight`}>
-                Israel Ibitoye
-              </p>
-              <div className="flex items-center gap-1.5 mt-1 min-h-[16px]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-ping shrink-0" />
-                <p className="text-[10px] font-mono text-[#D4AF37] uppercase tracking-widest font-semibold transition-all duration-300">
-                  {currentText}
-                  <span className="inline-block w-[2px] h-[10px] bg-[#D4AF37] ml-0.5 align-baseline animate-pulse" />
-                </p>
+            {/* Inner dynamic card layout */}
+            <div className="h-full flex flex-col justify-between relative z-20">
+              
+              {/* Header Status Bar */}
+              <div className="flex items-center justify-between border-b border-white/5 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-ping" />
+                  <span className="text-[9px] font-mono text-gray-400 tracking-wider uppercase">Lead Director & Software Architect</span>
+                </div>
+                <Compass size={13} className="text-[#D4AF37] animate-spin" style={{ animationDuration: '24s' }} />
               </div>
-            </div>
 
-            {/* Bottom active spec details */}
-            <div className="border-t border-white/10 pt-3.5 flex items-center justify-between">
-              <div className="flex flex-col text-left">
-                <span className="text-[8px] font-mono text-gray-500">AUTHORITY ID FILE:</span>
-                <span className="text-[10px] font-mono text-white tracking-widest uppercase">CEO_ISRAEL_2026</span>
+              {/* CGI 3D Premium Portrait Wrapper with Breathing and Spot Light Glows */}
+              <div className="flex-1 my-4 overflow-hidden rounded relative border border-white/5 bg-black flex items-center justify-center group-hover:border-white/10 transition-colors">
+                
+                {/* Spotlight glare backdrop inside portrait */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.06),transparent_70%)] pointer-events-none" />
+
+                {/* Founder actual portrait imported dynamically, styled with subtle breathing */}
+                <motion.img 
+                  src={israelPortrait} 
+                  alt="Israel Ibitoye portrait" 
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover grayscale contrast-[1.05] brightness-[0.95] group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700"
+                  animate={{
+                    scale: [1, 1.025, 1],
+                  }}
+                  transition={{
+                    duration: 7,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+
+                {/* Elegant overlay shadow on bottom of portrait */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               </div>
-              <div className="flex gap-1.5 items-center">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
-                <span className="text-[9px] font-mono text-[#D4AF37] uppercase font-bold tracking-wider">Active</span>
+
+              {/* Founder Identity & Dynamic Subtitles */}
+              <div className="bg-black/80 backdrop-blur-md p-3.5 rounded border border-white/5 text-left">
+                <div className="flex justify-between items-center">
+                  <h4 className={`${fontClass} text-xl font-bold text-white tracking-tight`}>
+                    Israel Ibitoye
+                  </h4>
+                  <div className="flex items-center gap-1">
+                    <ShieldCheck size={11} className="text-[#D4AF37]" />
+                    <span className="text-[8px] font-mono text-gray-500 uppercase tracking-widest">VERIFIED</span>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-1.5 mt-1 min-h-[16px]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] shrink-0 animate-pulse" />
+                  <p className="text-[10px] font-mono text-[#D4AF37] uppercase tracking-widest font-bold">
+                    {currentText}
+                    <span className="inline-block w-[2px] h-[10px] bg-[#D4AF37] ml-1 align-baseline animate-pulse" />
+                  </p>
+                </div>
               </div>
+
+              {/* Technical ID details footer */}
+              <div className="border-t border-white/5 pt-3.5 flex items-center justify-between">
+                <div className="flex flex-col text-left">
+                  <span className="text-[8px] font-mono text-gray-500">SYSTEM METRIC ID:</span>
+                  <span className="text-[10px] font-mono text-white tracking-widest uppercase">CEO_ISRAEL_2026</span>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping" />
+                  <span className="text-[9px] font-mono text-green-500 uppercase font-bold tracking-wider">Active Stream</span>
+                </div>
+              </div>
+
             </div>
           </motion.div>
-
         </div>
 
       </div>
 
-      {/* Bounce-Down indicator */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-gray-500 cursor-pointer text-xs uppercase font-mono tracking-widest hover:text-white transition-colors duration-300">
-        <ArrowDown size={14} className="animate-bounce" />
+      {/* Slide-Down indicator */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-gray-600 cursor-pointer text-[9px] uppercase font-mono tracking-[0.25em] hover:text-white transition-colors duration-300">
+        <ArrowDown size={14} className="animate-bounce text-[#D4AF37]" />
       </div>
 
     </section>
