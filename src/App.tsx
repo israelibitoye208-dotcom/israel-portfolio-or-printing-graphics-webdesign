@@ -21,6 +21,8 @@ import BookingForm from './components/BookingForm';
 import BlogGrid from './components/BlogGrid';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
+import SeoManager from './components/SeoManager';
+import { Cookie, X } from 'lucide-react';
 
 export default function App() {
   // Primary persistent core state container
@@ -55,6 +57,13 @@ export default function App() {
   });
   const [activeTab, setActiveTab] = useState<'client' | 'admin'>('client');
   const [selectedServiceId, setSelectedServiceId] = useState<string>('');
+  const [cookieConsentAccepted, setCookieConsentAccepted] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('dominion_cookie_consent') === 'accepted';
+    } catch {
+      return false;
+    }
+  });
 
   // Initial persistent recovery from local storage client-side
   useEffect(() => {
@@ -380,7 +389,8 @@ export default function App() {
           subscribers: parsed.subscribers || INITIAL_CMS_STATE.subscribers,
           sections: parsed.sections || INITIAL_CMS_STATE.sections,
           contact: { ...INITIAL_CMS_STATE.contact, ...parsed.contact },
-          visual: { ...INITIAL_CMS_STATE.visual, ...parsed.visual }
+          visual: { ...INITIAL_CMS_STATE.visual, ...parsed.visual },
+          seo: parsed.seo ? { ...INITIAL_CMS_STATE.seo, ...parsed.seo } : INITIAL_CMS_STATE.seo
         };
         setCmsState(loadedState);
         // Persist with the new key name
@@ -585,6 +595,9 @@ export default function App() {
       }}
     >
       
+      {/* Dynamic SEO Tag & Structured Schema.org Injection Manager */}
+      <SeoManager state={cmsState} currentTab={activeTab} />
+      
       {/* Sticky Premium Header / Navbar switcher */}
       <Navbar 
         currentTab={activeTab} 
@@ -643,6 +656,51 @@ export default function App() {
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.003 5.424 5.429 0 12.085 0c3.225.001 6.258 1.258 8.537 3.541 2.279 2.284 3.534 5.32 3.531 8.545-.004 6.661-5.43 12.085-12.088 12.085-2.007-.001-3.982-.5-5.816-1.45L0 24zm6.59-4.846c1.785 1.058 3.507 1.62 5.513 1.621 5.311 0 9.63-4.316 9.634-9.627.002-2.571-.998-4.992-2.82-6.812-1.819-1.818-4.237-2.818-6.814-2.819-5.319 0-9.638 4.318-9.642 9.628-.001 2.038.533 4.027 1.545 5.793L1.816 22.25l4.831-1.266z" />
           </svg>
         </a>
+      )}
+
+      {/* Dynamic Privacy & Cookie Consent Banner for SEO Best Practice Compliance */}
+      {!cookieConsentAccepted && activeTab === 'client' && (
+        <div className="fixed bottom-6 left-6 right-6 md:left-12 md:max-w-md bg-[#0F0F0F] border border-[#D4AF37]/25 p-5 rounded shadow-2xl z-50 text-left font-sans backdrop-blur-md">
+          <div className="flex items-start gap-3">
+            <div className="p-2 rounded bg-[#D4AF37]/10 text-[#D4AF37] shrink-0 mt-0.5">
+              <Cookie size={18} />
+            </div>
+            <div className="flex-1">
+              <h5 className="text-xs font-mono font-bold uppercase tracking-wider text-white">
+                Sovereign Cookie Consent
+              </h5>
+              <p className="text-[10px] text-gray-400 mt-1 leading-relaxed">
+                Dominion Creative Studio utilizes cookies to analyze web traffic, enhance search indexing alignment, and optimize our luxury presentation matrix.
+              </p>
+              <div className="flex items-center gap-3 mt-4">
+                <button
+                  id="btn-accept-cookie"
+                  onClick={() => {
+                    try {
+                      localStorage.setItem('dominion_cookie_consent', 'accepted');
+                    } catch {}
+                    setCookieConsentAccepted(true);
+                  }}
+                  className="bg-[#D4AF37] hover:bg-[#C9A227] text-black font-mono text-[9px] font-bold uppercase tracking-wider px-4 py-1.5 rounded transition-colors"
+                >
+                  Accept Core Settings
+                </button>
+                <button
+                  id="btn-close-cookie"
+                  onClick={() => {
+                    try {
+                      localStorage.setItem('dominion_cookie_consent', 'declined');
+                    } catch {}
+                    setCookieConsentAccepted(true);
+                  }}
+                  className="text-gray-500 hover:text-white font-mono text-[9px] uppercase tracking-wider transition-colors"
+                >
+                  Decline
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
 
     </div>

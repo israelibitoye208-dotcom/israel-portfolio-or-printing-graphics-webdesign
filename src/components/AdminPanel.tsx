@@ -1438,6 +1438,45 @@ export default function AdminPanel({ state, updateState, onClose }: AdminPanelPr
                     </div>
                   </div>
 
+                  {/* Executive Identity Portrait Fallbacks */}
+                  <div className="border-t border-white/5 pt-4 mt-2">
+                    <h5 className="text-white text-xs font-semibold mb-2 font-sans">Executive Identity Portrait & 3D Fallback System</h5>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="flex flex-col gap-1.5 font-mono">
+                        <label className="text-gray-400 uppercase text-[9px]">Custom Founder Portrait URL:</label>
+                        <input
+                          type="text"
+                          placeholder="Paste image URL (Leave blank to trigger 3D Art Fallback)"
+                          value={state.visual.founderPortraitUrl || ''}
+                          onChange={(e) => {
+                            const vis = { ...state.visual, founderPortraitUrl: e.target.value };
+                            dispatchStateChange({ visual: vis });
+                          }}
+                          className="bg-black border border-white/15 rounded px-3 py-2 text-white focus:outline-none focus:border-[#D4AF37]"
+                        />
+                        <span className="text-[8px] text-gray-500 mt-0.5">Allows pasting custom portraits from CMS or dynamic links.</span>
+                      </div>
+
+                      <div className="flex flex-col gap-1.5 font-mono">
+                        <label className="text-gray-400 uppercase text-[9px]">Active Artwork / Fallback Mode:</label>
+                        <select
+                          value={state.visual.portraitMode || 'photo'}
+                          onChange={(e) => {
+                            const vis = { ...state.visual, portraitMode: e.target.value as any };
+                            dispatchStateChange({ visual: vis });
+                          }}
+                          className="bg-black border border-white/15 text-white rounded px-3 py-2 focus:outline-none"
+                        >
+                          <option value="photo">Photorealistic Photo (Or Fallback if empty/broken)</option>
+                          <option value="3d-sculpture">Tactile 3D Sculpture Placeholder</option>
+                          <option value="geometric-gold">Geometric Gold Artwork</option>
+                          <option value="cinematic">Cinematic Creative Wave</option>
+                        </select>
+                        <span className="text-[8px] text-gray-500 mt-0.5">Choose active aesthetic artwork mode or standard photo.</span>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-2">
                     <div className="flex flex-col gap-1.5">
                       <label className="text-gray-500 text-[9px] font-mono">OFFICIAL INBOX EMAIL:</label>
@@ -1525,40 +1564,183 @@ export default function AdminPanel({ state, updateState, onClose }: AdminPanelPr
 
             {/* SEO & SEARCH SCHEMA / SITEMAPS MODULE */}
             {activeMenu === 'seo' && (
-              <div className="flex flex-col gap-6 text-left font-mono text-xs">
+              <div className="flex flex-col gap-6 text-left font-sans text-xs">
                 
                 {/* Search Meta Customizer */}
                 <div className="flex flex-col gap-4 border-b border-white/5 pb-6">
-                  <div className="flex flex-col gap-1">
-                    <h4 className="text-white text-base font-semibold font-sans">SEO Meta Parameters Configuration</h4>
-                    <span className="text-xs text-gray-400 font-sans">Tailor Google crawler and OpenGraph attributes for high conversion matching.</span>
+                  <div className="flex flex-col gap-1 font-sans">
+                    <h4 className="text-white text-base font-semibold">SEO Meta Parameters Configuration</h4>
+                    <span className="text-xs text-gray-400">Tailor Google crawler and OpenGraph attributes dynamically for extreme discoverability.</span>
                   </div>
 
+                  {/* Interactive Inputs */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-zinc-950 p-5 rounded border border-white/5">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[9px] font-mono text-gray-400 uppercase">Search Page Title (Meta Title):</label>
+                      <input
+                        type="text"
+                        value={state.seo.metaTitle}
+                        onChange={(e) => {
+                          const freshSeo = { ...state.seo, metaTitle: e.target.value };
+                          dispatchStateChange({ seo: freshSeo });
+                        }}
+                        className="bg-black border border-white/10 rounded px-3 py-2 text-white focus:border-[#D4AF37] focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="flex flex-col gap-1.5 font-mono">
+                      <label className="text-[9px] text-gray-400 uppercase">Canonical Site URL:</label>
+                      <input
+                        type="text"
+                        value={state.seo.canonicalUrl}
+                        onChange={(e) => {
+                          const freshSeo = { ...state.seo, canonicalUrl: e.target.value };
+                          dispatchStateChange({ seo: freshSeo });
+                        }}
+                        className="bg-black border border-white/10 rounded px-3 py-2 text-white focus:border-[#D4AF37] focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="flex flex-col gap-1.5 md:col-span-2">
+                      <label className="text-[9px] font-mono text-gray-400 uppercase">Search Snippet Description (Meta Description):</label>
+                      <textarea
+                        rows={2}
+                        value={state.seo.metaDescription}
+                        onChange={(e) => {
+                          const freshSeo = { ...state.seo, metaDescription: e.target.value };
+                          dispatchStateChange({ seo: freshSeo });
+                        }}
+                        className="bg-black border border-white/10 rounded px-3 py-2 text-white focus:border-[#D4AF37] focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="flex flex-col gap-1.5 md:col-span-2">
+                      <label className="text-[9px] font-mono text-gray-400 uppercase">Focus Keywords (Comma Separated):</label>
+                      <input
+                        type="text"
+                        value={state.seo.focusKeywords.join(', ')}
+                        onChange={(e) => {
+                          const kws = e.target.value.split(',').map(k => k.trim()).filter(Boolean);
+                          const freshSeo = { ...state.seo, focusKeywords: kws };
+                          dispatchStateChange({ seo: freshSeo });
+                        }}
+                        className="bg-black border border-white/10 rounded px-3 py-2 text-white focus:border-[#D4AF37] focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Analytics & Search Console Integrations */}
+                  <div className="flex flex-col gap-1 mt-2">
+                    <h5 className="text-white text-xs font-semibold">Integrations & Crawler Verification Keys</h5>
+                    <span className="text-[10px] text-gray-400">Deploy verification and conversion pixels safely across the head layout.</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-zinc-950 p-5 rounded border border-white/5 font-sans">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[9px] font-mono text-gray-400 uppercase font-bold">Google Analytics ID:</label>
+                      <input
+                        type="text"
+                        placeholder="G-XXXXXXX"
+                        value={state.seo.googleAnalyticsId}
+                        onChange={(e) => {
+                          const freshSeo = { ...state.seo, googleAnalyticsId: e.target.value };
+                          dispatchStateChange({ seo: freshSeo });
+                        }}
+                        className="bg-black border border-white/10 rounded px-3 py-2 text-white font-mono focus:border-[#D4AF37] focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[9px] font-mono text-gray-400 uppercase font-bold">Google Search Console Key:</label>
+                      <input
+                        type="text"
+                        placeholder="sc-verification-code"
+                        value={state.seo.searchConsoleId}
+                        onChange={(e) => {
+                          const freshSeo = { ...state.seo, searchConsoleId: e.target.value };
+                          dispatchStateChange({ seo: freshSeo });
+                        }}
+                        className="bg-black border border-white/10 rounded px-3 py-2 text-white font-mono focus:border-[#D4AF37] focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[9px] font-mono text-gray-400 uppercase font-bold">Microsoft Clarity ID:</label>
+                      <input
+                        type="text"
+                        placeholder="clarity-project-id"
+                        value={state.seo.clarityId}
+                        onChange={(e) => {
+                          const freshSeo = { ...state.seo, clarityId: e.target.value };
+                          dispatchStateChange({ seo: freshSeo });
+                        }}
+                        className="bg-black border border-white/10 rounded px-3 py-2 text-white font-mono focus:border-[#D4AF37] focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Schema Org values */}
+                  <div className="flex flex-col gap-1 mt-2">
+                    <h5 className="text-white text-xs font-semibold">Structured Schema.org Values</h5>
+                    <span className="text-[10px] text-gray-400">Configure organizational coordinates served natively to crawlers.</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-zinc-950 p-5 rounded border border-white/5 font-sans">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-[9px] font-mono text-gray-400 uppercase font-bold">Organization Name:</label>
+                      <input
+                        type="text"
+                        value={state.seo.organizationSchemaName}
+                        onChange={(e) => {
+                          const freshSeo = { ...state.seo, organizationSchemaName: e.target.value };
+                          dispatchStateChange({ seo: freshSeo });
+                        }}
+                        className="bg-black border border-white/10 rounded px-3 py-2 text-white focus:border-[#D4AF37] focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="flex flex-col gap-1.5 font-mono">
+                      <label className="text-[9px] text-gray-400 uppercase">Organization Logo Link:</label>
+                      <input
+                        type="text"
+                        value={state.seo.organizationSchemaLogo}
+                        onChange={(e) => {
+                          const freshSeo = { ...state.seo, organizationSchemaLogo: e.target.value };
+                          dispatchStateChange({ seo: freshSeo });
+                        }}
+                        className="bg-black border border-white/10 rounded px-3 py-2 text-white focus:border-[#D4AF37] focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Live mockup presentation */}
                   <div className="p-4 border border-white/5 bg-black rounded flex flex-col gap-3 font-sans">
-                    <span className="text-[10px] font-mono text-[#D4AF37] uppercase tracking-widest block">Live Desktop Search Engine Mockup:</span>
-                    <div className="bg-white p-4 rounded text-black text-left font-sans flex flex-col gap-1 text-sm max-w-xl shadow-md">
-                      <span className="text-gray-500 text-xs flex items-center gap-1">https://dominioncreativestudio.com <span className="text-[10px]">▼</span></span>
+                    <span className="text-[10px] font-mono text-[#D4AF37] uppercase tracking-widest block font-bold">Live Desktop Search Engine Mockup:</span>
+                    <div className="bg-white p-5 rounded text-black text-left flex flex-col gap-1 text-sm max-w-xl shadow-md">
+                      <span className="text-gray-500 text-[11px] flex items-center gap-1">
+                        {state.seo.canonicalUrl} <span className="text-[9px]">▼</span>
+                      </span>
                       <a href="#mock-search" className="text-blue-800 text-lg hover:underline font-semibold leading-tight block">
-                        Dominion Creative Studio | Luxury Creative Agency & Print Studio
+                        {state.seo.metaTitle}
                       </a>
                       <p className="text-gray-700 text-xs font-light leading-relaxed">
-                        {state.blogPosts[0]?.metaDescription || 'Luxury boutique websites, pristine visual identity packages, monogram polo wear, books layout, and large backdrop prints.'}
+                        {state.seo.metaDescription}
                       </p>
                     </div>
                   </div>
                 </div>
 
                 {/* JSON-LD Schema.org Panel */}
-                <div className="flex flex-col gap-3">
-                  <span className="text-xs uppercase font-bold text-[#D4AF37] tracking-widest block">Live Search Schema.org JSON-LD (LD+JSON) Script:</span>
+                <div className="flex flex-col gap-3 font-mono">
+                  <span className="text-xs uppercase font-bold text-[#D4AF37] tracking-widest block font-sans">Live Search Schema.org JSON-LD (LD+JSON) Script:</span>
                   <pre className="text-[9.5px] bg-black p-4 rounded border border-white/5 overflow-x-auto text-gray-400 whitespace-pre font-mono leading-normal">
                     {JSON.stringify(schemaJsonLD, null, 2)}
                   </pre>
                 </div>
 
                 {/* XML Sitemap panel */}
-                <div className="flex flex-col gap-3 pt-6 border-t border-white/5">
-                  <span className="text-xs uppercase font-bold text-[#D4AF37] tracking-widest block">Dynamic SEO Compliant xml Sitemap markup:</span>
+                <div className="flex flex-col gap-3 pt-6 border-t border-white/5 font-mono">
+                  <span className="text-xs uppercase font-bold text-[#D4AF37] tracking-widest block font-sans">Dynamic SEO Compliant xml Sitemap markup:</span>
                   <pre className="text-[9.5px] bg-black p-4 rounded border border-white/5 overflow-x-auto text-gray-400 whitespace-pre font-mono leading-normal">
                     {xmlSitemapPreview}
                   </pre>

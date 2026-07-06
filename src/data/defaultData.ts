@@ -849,6 +849,27 @@ When an enterprise prospect leaves an online pitch deck, the interaction ceases.
     textWhite: '#FFFFFF',
     softGray: '#B8B8B8',
     fontHeadingStyle: 'serif',
-    cinematicVibe: 'executive'
+    cinematicVibe: 'executive',
+    founderPortraitUrl: '', // Leave empty to support fallback out-of-the-box, can be customized in CMS
+    portraitMode: 'photo'
+  },
+  seo: {
+    metaTitle: 'Dominion Creative Studio | Luxury Website Design & Brand Identity Agency Nigeria',
+    metaDescription: 'Dominion Creative Studio is a premier luxury website design, high-performance web development, brand identity design, computerized monogram embroidery, large format printing, and bespoke framing agency in Nigeria.',
+    focusKeywords: [
+      'Luxury Website Design', 'Website Designer Nigeria', 'Branding Agency Nigeria', 
+      'Graphic Design Services', 'Print Design', 'Large Format Printing', 
+      'Brand Identity Design', 'Business Website Development', 'Creative Agency', 
+      'Professional Printing Solutions', 'Corporate Branding', 'Restaurant Branding', 
+      'Church Branding', 'School Branding'
+    ],
+    canonicalUrl: 'https://dominioncreativestudio.com',
+    googleAnalyticsId: 'G-XXXXXXX',
+    searchConsoleId: 'sc-verification-code',
+    clarityId: 'clarity-project-id',
+    organizationSchemaName: 'Dominion Creative Studio',
+    organizationSchemaLogo: 'https://dominioncreativestudio.com/assets/images/logo.png',
+    localBusinessAddress: 'Lagos, Nigeria',
+    localBusinessPhone: '+2349050804512'
   }
 };

@@ -120,6 +120,22 @@ export interface VisualConfig {
   softGray: string;
   fontHeadingStyle: 'serif' | 'sans' | 'mono';
   cinematicVibe: 'minimal' | 'executive' | 'noir' | 'modern';
+  founderPortraitUrl?: string;
+  portraitMode?: 'photo' | '3d-sculpture' | 'geometric-gold' | 'cinematic';
+}
+
+export interface SEOConfig {
+  metaTitle: string;
+  metaDescription: string;
+  focusKeywords: string[];
+  canonicalUrl: string;
+  googleAnalyticsId: string;
+  searchConsoleId: string;
+  clarityId: string;
+  organizationSchemaName: string;
+  organizationSchemaLogo: string;
+  localBusinessAddress: string;
+  localBusinessPhone: string;
 }
 
 export interface NewsletterSubscriber {
@@ -140,4 +156,5 @@ export interface CMSAppState {
   sections: SectionConfig[];
   contact: ContactInfo;
   visual: VisualConfig;
+  seo: SEOConfig;
 }

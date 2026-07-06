@@ -35,6 +35,120 @@ export default function Hero({ onStartProject, onViewPortfolio, visual }: HeroPr
   const [tilt, setTilt] = React.useState({ x: 0, y: 0 });
   const [glowPos, setGlowPos] = React.useState({ x: 50, y: 50 });
 
+  // Portrait load error state & configuration tracking
+  const [imageError, setImageError] = React.useState(false);
+  const portraitUrl = visual.founderPortraitUrl || israelPortrait;
+  const portraitMode = visual.portraitMode || 'photo';
+
+  const renderLuxuryFallback = () => {
+    if (portraitMode === 'geometric-gold') {
+      return (
+        <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-black to-zinc-900 flex flex-col items-center justify-center p-6 text-center select-none overflow-hidden">
+          {/* Concentric high-contrast orbital vector graphics */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.05),transparent_60%)] pointer-events-none" />
+          
+          <motion.div 
+            className="w-48 h-48 rounded-full border border-[#D4AF37]/15 flex items-center justify-center relative"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          >
+            <div className="absolute w-2 h-2 rounded-full bg-[#D4AF37] top-0 shadow-[0_0_10px_#D4AF37]" />
+            <div className="absolute w-1.5 h-1.5 rounded-full bg-white/40 bottom-0" />
+            
+            <motion.div 
+              className="w-36 h-36 rounded-full border border-white/5 flex items-center justify-center"
+              animate={{ rotate: -720 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            >
+              <div className="absolute w-1.5 h-1.5 rounded-full bg-[#D4AF37]/80 right-0" />
+            </motion.div>
+          </motion.div>
+
+          {/* Golden Monogram Sigil */}
+          <div className="absolute w-20 h-20 flex items-center justify-center z-10">
+            <svg className="w-12 h-12 text-[#D4AF37]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <polygon points="50,15 85,80 15,80" />
+              <circle cx="50" cy="50" r="14" strokeWidth="1" strokeDasharray="3 3" />
+              <path d="M50,15 L50,80" strokeWidth="0.5" />
+            </svg>
+          </div>
+
+          <div className="absolute bottom-4 flex flex-col items-center">
+            <span className="text-[7.5px] font-mono text-[#D4AF37] uppercase tracking-[0.3em] font-bold animate-pulse">Sovereign Emblem State</span>
+            <span className="text-[6.5px] font-mono text-gray-500 uppercase tracking-wider mt-0.5">GEOMETRIC_GOLD_MODE</span>
+          </div>
+        </div>
+      );
+    }
+
+    if (portraitMode === 'cinematic') {
+      return (
+        <div className="absolute inset-0 bg-black flex flex-col items-center justify-center p-6 text-center select-none overflow-hidden">
+          {/* Moving particles or waves representing digital code & craft */}
+          <div className="absolute inset-0 bg-[radial-gradient(#1c1c1c_1px,transparent_1px)] [background-size:16px_16px] opacity-70" />
+          
+          <motion.div 
+            className="w-40 h-40 rounded bg-gradient-to-tr from-[#D4AF37]/5 to-transparent border border-white/10 flex items-center justify-center"
+            animate={{
+              borderRadius: ["20% 30% 10% 40%", "30% 20% 40% 10%", "20% 30% 10% 40%"],
+              scale: [1, 1.05, 1]
+            }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Compass size={40} className="text-[#D4AF37] opacity-60 animate-spin" style={{ animationDuration: '30s' }} />
+          </motion.div>
+
+          <div className="absolute bottom-4 flex flex-col items-center">
+            <span className="text-[7.5px] font-mono text-[#D4AF37] uppercase tracking-[0.3em] font-bold animate-pulse">Cinematic Synthesis Active</span>
+            <span className="text-[6.5px] font-mono text-gray-500 uppercase tracking-wider mt-0.5">CINEMATIC_VIBE_MODE</span>
+          </div>
+        </div>
+      );
+    }
+
+    // Default '3d-sculpture' luxury artwork
+    return (
+      <div className="absolute inset-0 bg-[#060606] flex flex-col items-center justify-center p-6 text-center select-none overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black pointer-events-none" />
+        
+        {/* Glowing Ambient Core Orb */}
+        <motion.div 
+          className="w-32 h-32 rounded-full bg-gradient-to-tr from-[#D4AF37]/10 via-[#D4AF37]/5 to-transparent border border-[#D4AF37]/20 flex items-center justify-center relative shadow-[0_0_50px_rgba(212,175,55,0.05)]"
+          animate={{
+            scale: [1, 1.08, 1],
+            rotate: 360
+          }}
+          transition={{
+            scale: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: 40, repeat: Infinity, ease: "linear" }
+          }}
+        >
+          {/* Orbital Satellite */}
+          <div className="absolute w-2 h-2 rounded-full bg-[#D4AF37] -top-1 left-1/2 -translate-x-1/2 shadow-[0_0_12px_#D4AF37]" />
+          
+          {/* Nested Gold Rings */}
+          <div className="w-24 h-24 rounded-full border border-white/5 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full border border-[#D4AF37]/10 flex items-center justify-center">
+              <div className="w-6 h-6 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 blur-xs" />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Outer Kinetic Ring */}
+        <motion.div 
+          className="absolute w-44 h-44 rounded-full border border-white/5 border-dashed"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        />
+
+        <div className="absolute bottom-4 flex flex-col items-center">
+          <span className="text-[7.5px] font-mono text-[#D4AF37] uppercase tracking-[0.3em] font-bold animate-pulse">Kinetic Masterpiece Fallback</span>
+          <span className="text-[6.5px] font-mono text-gray-500 uppercase tracking-wider mt-0.5">TACTILE_3D_SCULPTURE</span>
+        </div>
+      </div>
+    );
+  };
+
   React.useEffect(() => {
     let timer: NodeJS.Timeout;
     const fullText = TITLES[titleIdx];
@@ -237,29 +351,36 @@ export default function Hero({ onStartProject, onViewPortfolio, visual }: HeroPr
               </div>
 
               {/* CGI 3D Premium Portrait Wrapper with Breathing and Spot Light Glows */}
-              <div className="flex-1 my-4 overflow-hidden rounded relative border border-white/5 bg-black flex items-center justify-center group-hover:border-white/10 transition-colors">
+              <div className="flex-1 my-4 overflow-hidden rounded relative border border-white/5 bg-black flex items-center justify-center group-hover:border-white/10 transition-colors min-h-[220px]">
                 
-                {/* Spotlight glare backdrop inside portrait */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.06),transparent_70%)] pointer-events-none" />
+                {portraitMode === 'photo' && portraitUrl && !imageError ? (
+                  <>
+                    {/* Spotlight glare backdrop inside portrait */}
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.06),transparent_70%)] pointer-events-none" />
 
-                {/* Founder actual portrait imported dynamically, styled with subtle breathing */}
-                <motion.img 
-                  src={israelPortrait} 
-                  alt="Israel Ibitoye portrait" 
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover grayscale contrast-[1.05] brightness-[0.95] group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700"
-                  animate={{
-                    scale: [1, 1.025, 1],
-                  }}
-                  transition={{
-                    duration: 7,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
+                    {/* Founder actual portrait imported dynamically, styled with subtle breathing */}
+                    <motion.img 
+                      src={portraitUrl} 
+                      alt="Israel Ibitoye portrait" 
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover grayscale contrast-[1.05] brightness-[0.95] group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700"
+                      onError={() => setImageError(true)}
+                      animate={{
+                        scale: [1, 1.025, 1],
+                      }}
+                      transition={{
+                        duration: 7,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
 
-                {/* Elegant overlay shadow on bottom of portrait */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                    {/* Elegant overlay shadow on bottom of portrait */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                  </>
+                ) : (
+                  renderLuxuryFallback()
+                )}
               </div>
 
               {/* Founder Identity & Dynamic Subtitles */}
