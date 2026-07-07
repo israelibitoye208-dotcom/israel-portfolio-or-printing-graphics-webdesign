@@ -863,12 +863,12 @@ When an enterprise prospect leaves an online pitch deck, the interaction ceases.
       'Professional Printing Solutions', 'Corporate Branding', 'Restaurant Branding', 
       'Church Branding', 'School Branding'
     ],
-    canonicalUrl: 'https://dominioncreativestudio.com',
+    canonicalUrl: 'https://dominioncreativestudio.com.ng',
     googleAnalyticsId: 'G-XXXXXXX',
     searchConsoleId: 'sc-verification-code',
     clarityId: 'clarity-project-id',
     organizationSchemaName: 'Dominion Creative Studio',
-    organizationSchemaLogo: 'https://dominioncreativestudio.com/assets/images/logo.png',
+    organizationSchemaLogo: 'https://dominioncreativestudio.com.ng/assets/images/logo.png',
     localBusinessAddress: 'Lagos, Nigeria',
     localBusinessPhone: '+2349050804512'
   }

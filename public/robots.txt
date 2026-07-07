@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap coordinates
-Sitemap: https://dominioncreativestudio.com/sitemap.xml
+Sitemap: https://dominioncreativestudio.com.ng/sitemap.xml
